@@ -36,13 +36,13 @@ export const SmokeParticles = () => {
       {particles.map((particle) => (
         <div
           key={particle.id}
-          className="smoke-particle"
+          className="smoke-particle-static"
           style={{
             left: `${particle.left}%`,
-            animationDelay: `${particle.delay}s`,
-            animationDuration: `${particle.duration}s`,
+            top: `${20 + (particle.id * 8)}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
+            opacity: 0.6,
           }}
         />
       ))}

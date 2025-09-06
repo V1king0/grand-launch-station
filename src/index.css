@@ -121,7 +121,6 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: gradient-shift 3s ease-in-out infinite;
   }
 
   .gradient-card {
@@ -165,7 +164,6 @@
                       radial-gradient(6px 6px at 160px 20px, hsl(300 100% 70% / 0.2), transparent);
     background-repeat: repeat;
     background-size: 300px 200px;
-    animation: smoke-drift 20s linear infinite;
   }
 
   .smoke-particles {
@@ -183,6 +181,14 @@
     background: var(--gradient-smoke);
     border-radius: 50%;
     animation: smoke-float 8s linear infinite;
+  }
+
+  .smoke-particle-static {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gradient-smoke);
+    border-radius: 50%;
   }
 
   .rating-badge {
