@@ -24,19 +24,22 @@ export const LauncherTile = ({
 
   return (
     <Card 
-      className={`launcher-tile cursor-pointer p-8 transition-glow ${glowClass} group`}
+      className={`launcher-tile cursor-pointer p-8 transition-glow ${glowClass} group relative overflow-hidden`}
       onClick={onClick}
     >
-      <div className="flex flex-col items-center text-center space-y-4">
+      {/* Subtle smoke overlay on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 bg-gradient-smoke"></div>
+      
+      <div className="flex flex-col items-center text-center space-y-4 relative z-10">
         <div className="relative">
           <Icon 
             size={64} 
-            className="text-primary group-hover:text-secondary transition-colors duration-300" 
+            className="text-primary group-hover:text-accent transition-colors duration-300 group-hover:animate-puff-breathe" 
           />
           <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <Icon 
               size={64} 
-              className="text-primary animate-pulse-glow" 
+              className="text-accent animate-pulse-glow blur-sm" 
             />
           </div>
         </div>
@@ -45,7 +48,7 @@ export const LauncherTile = ({
           <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
             {title}
           </h3>
-          <p className="text-muted-foreground group-hover:text-secondary transition-colors duration-300">
+          <p className="text-muted-foreground group-hover:text-accent transition-colors duration-300">
             {description}
           </p>
         </div>

@@ -11,13 +11,13 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen stars-bg flex items-center justify-center">
+    <div className="min-h-screen smoke-bg flex items-center justify-center">
       <div className="text-center space-y-8">
         <div className="space-y-4">
-          <h1 className="text-8xl md:text-9xl font-bold gradient-hero animate-gradient">404</h1>
-          <h2 className="text-3xl md:text-4xl font-bold text-primary">Game Not Found</h2>
+          <h1 className="text-8xl md:text-9xl font-bold gradient-hero animate-gradient animate-puff-breathe">404</h1>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">Session Not Found</h2>
           <p className="text-xl text-muted-foreground max-w-md mx-auto">
-            Looks like you wandered off the grid. Let's get you back to the game hub!
+            Looks like you drifted off course. Let's get you back to the Puff-Hub!
           </p>
         </div>
         

@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Synthwave Color Palette */
+    /* Puff-Hub 420 Color Palette */
     --background: 240 30% 8%;
     --foreground: 300 100% 95%;
 
@@ -16,16 +16,16 @@
     --popover: 240 25% 12%;
     --popover-foreground: 300 100% 95%;
 
-    --primary: 300 100% 70%;
+    --primary: 120 100% 70%;
     --primary-foreground: 240 30% 8%;
 
-    --secondary: 195 100% 65%;
+    --secondary: 300 100% 70%;
     --secondary-foreground: 240 30% 8%;
 
     --muted: 240 20% 15%;
     --muted-foreground: 300 50% 75%;
 
-    --accent: 120 100% 65%;
+    --accent: 160 100% 65%;
     --accent-foreground: 240 30% 8%;
 
     --destructive: 0 84% 60%;
@@ -37,16 +37,18 @@
 
     --radius: 0.75rem;
 
-    /* Synthwave Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(300 100% 70%), hsl(195 100% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(195 100% 65%), hsl(120 100% 65%));
-    --gradient-hero: linear-gradient(135deg, hsl(300 100% 70%) 0%, hsl(270 100% 60%) 25%, hsl(195 100% 65%) 50%, hsl(120 100% 65%) 75%, hsl(60 100% 70%) 100%);
+    /* Puff-Hub 420 Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(120 100% 70%), hsl(160 100% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(300 100% 70%), hsl(120 100% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(120 100% 70%) 0%, hsl(160 100% 65%) 25%, hsl(300 100% 70%) 50%, hsl(270 100% 60%) 75%, hsl(120 100% 70%) 100%);
     --gradient-card: linear-gradient(145deg, hsl(240 25% 12%) 0%, hsl(240 30% 15%) 100%);
+    --gradient-smoke: linear-gradient(135deg, hsl(120 100% 70% / 0.1), hsl(160 100% 65% / 0.1), hsl(300 100% 70% / 0.1));
 
-    /* Glow Effects */
-    --glow-primary: 0 0 20px hsl(300 100% 70% / 0.5);
-    --glow-secondary: 0 0 20px hsl(195 100% 65% / 0.5);
-    --glow-accent: 0 0 20px hsl(120 100% 65% / 0.5);
+    /* Puff Glow Effects */
+    --glow-primary: 0 0 30px hsl(120 100% 70% / 0.6);
+    --glow-secondary: 0 0 30px hsl(300 100% 70% / 0.6);
+    --glow-accent: 0 0 30px hsl(160 100% 65% / 0.6);
+    --glow-smoke: 0 0 40px hsl(120 100% 70% / 0.3), 0 0 80px hsl(300 100% 70% / 0.2);
 
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -155,13 +157,38 @@
     transform: translateY(-2px) scale(1.02);
   }
 
-  .stars-bg {
-    background-image: radial-gradient(2px 2px at 20px 30px, #eee, transparent),
-                      radial-gradient(2px 2px at 40px 70px, hsl(300 100% 70%), transparent),
-                      radial-gradient(1px 1px at 90px 40px, hsl(195 100% 65%), transparent),
-                      radial-gradient(1px 1px at 130px 80px, hsl(120 100% 65%), transparent);
+  .smoke-bg {
+    background-image: radial-gradient(3px 3px at 20px 30px, hsl(120 100% 70% / 0.3), transparent),
+                      radial-gradient(2px 2px at 40px 70px, hsl(300 100% 70% / 0.4), transparent),
+                      radial-gradient(4px 4px at 90px 40px, hsl(160 100% 65% / 0.2), transparent),
+                      radial-gradient(1px 1px at 130px 80px, hsl(120 100% 70% / 0.5), transparent),
+                      radial-gradient(6px 6px at 160px 20px, hsl(300 100% 70% / 0.2), transparent);
     background-repeat: repeat;
-    background-size: 200px 100px;
+    background-size: 300px 200px;
+    animation: smoke-drift 20s linear infinite;
+  }
+
+  .smoke-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .smoke-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--gradient-smoke);
+    border-radius: 50%;
+    animation: smoke-float 8s linear infinite;
+  }
+
+  .rating-badge {
+    background: var(--gradient-secondary);
+    border: 2px solid hsl(var(--primary));
+    box-shadow: var(--glow-primary);
   }
 }
 
@@ -180,7 +207,44 @@
       box-shadow: var(--glow-primary);
     }
     50% {
-      box-shadow: 0 0 30px hsl(300 100% 70% / 0.8);
+      box-shadow: var(--glow-smoke);
+    }
+  }
+
+  @keyframes smoke-drift {
+    0% {
+      transform: translateX(0) translateY(0);
+    }
+    100% {
+      transform: translateX(-100px) translateY(-50px);
+    }
+  }
+
+  @keyframes smoke-float {
+    0% {
+      transform: translateY(100vh) scale(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) scale(1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes puff-breathe {
+    0%, 100% {
+      transform: scale(1);
+      filter: blur(0px);
+    }
+    50% {
+      transform: scale(1.05);
+      filter: blur(1px);
     }
   }
 
@@ -191,5 +255,13 @@
 
   .animate-pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-smoke-drift {
+    animation: smoke-drift 20s linear infinite;
+  }
+
+  .animate-puff-breathe {
+    animation: puff-breathe 4s ease-in-out infinite;
   }
 }
