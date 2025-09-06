@@ -1,5 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Home, Gamepad2 } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,13 +11,33 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
+    <div className="min-h-screen stars-bg flex items-center justify-center">
+      <div className="text-center space-y-8">
+        <div className="space-y-4">
+          <h1 className="text-8xl md:text-9xl font-bold gradient-hero animate-gradient">404</h1>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary">Game Not Found</h2>
+          <p className="text-xl text-muted-foreground max-w-md mx-auto">
+            Looks like you wandered off the grid. Let's get you back to the game hub!
+          </p>
+        </div>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button 
+            onClick={() => window.location.href = "/"} 
+            className="bg-gradient-primary hover:shadow-glow-primary transition-all duration-300"
+          >
+            <Home className="mr-2 h-4 w-4" />
+            Return to Hub
+          </Button>
+          <Button 
+            variant="outline" 
+            onClick={() => window.history.back()}
+            className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+          >
+            <Gamepad2 className="mr-2 h-4 w-4" />
+            Go Back
+          </Button>
+        </div>
       </div>
     </div>
   );
